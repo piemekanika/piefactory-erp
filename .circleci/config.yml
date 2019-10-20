@@ -1,9 +1,14 @@
 version: 2
 jobs:
   build:
+    branches:
+      only:
+        - master
+        - /release-.*/
     docker:
       - image: circleci/node:10.16.3
     steps:
       - checkout
-      - run: npm install
-      - run: npm run test:unit
+      - run: yarn
+      - run: yarn test:unit
+      - run: yarn test:e2e
