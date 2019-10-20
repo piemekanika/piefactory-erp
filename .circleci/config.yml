@@ -1,30 +1,6 @@
-# version: 2.1
-# orbs:
-#   cypress: cypress-io/cypress@1.11.0
-# workflows:
-#   install:
-#     branches:
-#       only:
-#         - master
-#         - /release-.*/
-#     jobs:
-#       - cypress/run:
-#         yarn: true
-
-# jobs:
-#   install:
-#     branches:
-#       only:
-#         - master
-#         - /release-.*/
-#     docker:
-#       - image: circleci/node:10.16.3
-#     steps:
-#       - checkout
-#       - run: yarn
-#       - run: yarn test:unit
-#       - run: yarn test:e2e
 version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1
 executors:
   my-executor:
     docker:
@@ -59,5 +35,10 @@ workflows:
     jobs:
       - install
       - test_unit:
+          requires:
+            - install
+      - cypress/run:
+          executor: cypress/browsers-chrome69
+          browser: chrome
           requires:
             - install
