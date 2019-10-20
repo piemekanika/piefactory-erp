@@ -2,7 +2,7 @@
 # orbs:
 #   cypress: cypress-io/cypress@1.11.0
 # workflows:
-#   build:
+#   install:
 #     branches:
 #       only:
 #         - master
@@ -12,7 +12,7 @@
 #         yarn: true
 
 # jobs:
-#   build:
+#   install:
 #     branches:
 #       only:
 #         - master
@@ -29,32 +29,35 @@ executors:
   my-executor:
     docker:
       - image: circleci/node:10.16.3
-    working_directory: ~/circle
+    working_directory: ~/erp
 jobs:
-  build:
+  install:
     executor: my-executor
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/erp
       - run: pwd
       - run: yarn
       - run: ls -a
       - persist_to_workspace:
-          root: ~/circle
+          root: ~/erp
           paths:
-            - node_modules
-            - yarn.lock
+            - ./node_modules
   test_unit:
     executor: my-executor
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/erp
       - run: pwd
       - run: ls -a
       - run: yarn test:unit
 workflows:
   version: 2.1
-  build_and_test:
+  install_and_test:
     jobs:
-      - build
+      - install
       - test_unit:
           requires:
-            - build
+            - install
