@@ -36,10 +36,10 @@ jobs:
     steps:
       - checkout
       - run: pwd
-      - run: ll
       - run: yarn
+      - run: ls -a
       - persist_to_workspace:
-          root: ./
+          root: ~/circle
           paths:
             - node_modules
             - yarn.lock
@@ -48,6 +48,7 @@ jobs:
     steps:
       - checkout
       - run: pwd
+      - run: ls -a
       - run: yarn test:unit
 workflows:
   version: 2.1
