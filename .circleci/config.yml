@@ -24,22 +24,24 @@
 #       - run: yarn
 #       - run: yarn test:unit
 #       - run: yarn test:e2e
-version: 2
-jobs:
-  build:
+version: 2.1
+executors:
+  my-executor:
     docker:
       - image: circleci/node:10.16.3
+jobs:
+  build:
+    executor: my-executor
     steps:
       - checkout
       - run: yarn
   test_unit:
-    docker:
-      - image: circleci/node:10.16.3
+    executor: my-executor
     steps:
       - checkout
       - run: yarn test:unit
 workflows:
-  version: 2
+  version: 2.1
   build_and_test:
     jobs:
       - build
