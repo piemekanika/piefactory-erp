@@ -20,6 +20,7 @@ jobs:
           root: ~/erp
           paths:
             - ./node_modules
+            - yarn.lock
   test_unit:
     executor: my-executor
     steps:
@@ -39,8 +40,8 @@ workflows:
             - install
       - cypress/run:
           executor: cypress/browsers-chrome69
+          yarn: true
           browser: chrome
           requires:
             - install
 
-            
