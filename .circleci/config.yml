@@ -29,6 +29,7 @@ executors:
   my-executor:
     docker:
       - image: circleci/node:10.16.3
+    working_directory: ~/circle
 jobs:
   build:
     executor: my-executor
