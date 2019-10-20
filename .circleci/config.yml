@@ -37,6 +37,11 @@ jobs:
       - checkout
       - run: pwd
       - run: yarn
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - node_modules
+            - yarn.lock
   test_unit:
     executor: my-executor
     steps:
