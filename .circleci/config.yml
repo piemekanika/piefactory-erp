@@ -24,7 +24,7 @@
 #       - run: yarn
 #       - run: yarn test:unit
 #       - run: yarn test:e2e
-
+version: 2.1
 jobs:
   build:
     docker:
@@ -39,9 +39,8 @@ jobs:
       - checkout
       - run: yarn test:unit
   # test_e2e:
-
 workflows:
-  version: 2
+  version: 2.1
   build_and_test:
     jobs:
       - build
