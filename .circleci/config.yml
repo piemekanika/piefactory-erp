@@ -29,17 +29,18 @@ executors:
   my-executor:
     docker:
       - image: circleci/node:10.16.3
-    working_directory: ./
 jobs:
   build:
     executor: my-executor
     steps:
       - checkout
+      - run: pwd
       - run: yarn
   test_unit:
     executor: my-executor
     steps:
       - checkout
+      - run: pwd
       - run: yarn test:unit
 workflows:
   version: 2.1
