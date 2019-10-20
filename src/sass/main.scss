@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap');
+
+// Tailwind CSS
+/* @import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities"; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply text-lg;
+
+  * {
+    font-family: 'PT Sans', sans-serif;
+  }
+}
