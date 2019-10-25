@@ -46,4 +46,3 @@ workflows:
           browser: chrome
           requires:
             - install
-          record: true
