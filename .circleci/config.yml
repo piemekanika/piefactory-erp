@@ -39,9 +39,11 @@ workflows:
           requires:
             - install
       - cypress/run:
+          start: npm run serve
+          wait-on: 'http://localhost:8080'
           executor: cypress/browsers-chrome69
           yarn: true
           browser: chrome
           requires:
             - install
-
+          record: true
