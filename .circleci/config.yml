@@ -13,9 +13,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/erp
-      - run: pwd
       - run: yarn
-      - run: ls -a
       - persist_to_workspace:
           root: ~/erp
           paths:
@@ -27,9 +25,14 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/erp
-      - run: pwd
-      - run: ls -a
       - run: yarn test:unit
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      name: Deploy Over SSH
+        command: |
+          ssh $SSH_USER@$SSH_HOST /var/www/piefactory-erp/deploy.sh
 workflows:
   version: 2.1
   install_and_test:
@@ -46,3 +49,7 @@ workflows:
           browser: chrome
           requires:
             - install
+      - deploy:
+          requires:
+            - test_unit
+            - cypress/run
