@@ -30,9 +30,10 @@ jobs:
     machine:
       enabled: true
     steps:
-      name: Deploy Over SSH
-        command: |
-          ssh $SSH_USER@$SSH_HOST /var/www/piefactory-erp/deploy.sh
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh $SSH_USER@$SSH_HOST /var/www/piefactory-erp/deploy.sh
 workflows:
   version: 2.1
   install_and_test:
